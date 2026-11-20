@@ -71,9 +71,9 @@ import com.topjohnwu.magisk.core.R as CoreR
 
 /** The remote-driven Magisk UI: a tab bar over the main sections, with detail screens pushed on top. */
 @Composable
-fun TvApp() {
+fun TvApp(startTab: TvTab = TvTab.Home) {
     MagiskTvTheme {
-        val navigator = rememberSaveable(saver = TvNavigatorSaver) { TvNavigator() }
+        val navigator = rememberSaveable(saver = TvNavigatorSaver) { TvNavigator(initialTab = startTab) }
         // Each route (and each tab) keeps its scroll position and focus while it is below the top
         val stateHolder = rememberSaveableStateHolder()
         navigator.onRouteRemoved = { stateHolder.removeState(it) }

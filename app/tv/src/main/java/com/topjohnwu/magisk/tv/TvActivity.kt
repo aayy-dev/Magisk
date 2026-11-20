@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.topjohnwu.magisk.core.Config
+import com.topjohnwu.magisk.core.Const
 import com.topjohnwu.magisk.core.base.ActivityExtension
 import com.topjohnwu.magisk.core.base.SplashController
 import com.topjohnwu.magisk.core.base.SplashScreenHost
@@ -43,7 +44,14 @@ class TvActivity : ComponentActivity(), SplashScreenHost {
     }
 
     override fun onCreateUi(savedInstanceState: Bundle?) {
-        setContent { TvApp() }
+        // Only a tab choice: the extra can come from any app, so it never triggers an action
+        val startTab = when (intent.getStringExtra(Const.Key.OPEN_SECTION)) {
+            Const.Nav.SUPERUSER -> TvTab.Superuser
+            Const.Nav.MODULES -> TvTab.Modules
+            Const.Nav.SETTINGS -> TvTab.Settings
+            else -> TvTab.Home
+        }
+        setContent { TvApp(startTab) }
         // The background update check needs it on Android 13+; stock asks at startup too
         if (Config.checkUpdate) {
             withPermission(Manifest.permission.POST_NOTIFICATIONS) { Config.checkUpdate = it }

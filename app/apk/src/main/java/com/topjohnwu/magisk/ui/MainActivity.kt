@@ -75,7 +75,17 @@ class MainActivity : NavigationActivity<ActivityMainMd2Binding>(), SplashScreenH
         // unchanged so it can migrate them; the process restart that follows redirects normally.
         if (!isRunningAsStub && isTelevision && intent.getBundleExtra(Const.Key.PREV_CONFIG) == null) {
             val started = try {
-                startActivity(Intent(this, TvActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                // Shortcuts and the system's app-settings entry name a section; pass just that along
+                val section = if (intent.action == Intent.ACTION_APPLICATION_PREFERENCES) {
+                    Const.Nav.SETTINGS
+                } else {
+                    intent.getStringExtra(Const.Key.OPEN_SECTION)
+                }
+                startActivity(
+                    Intent(this, TvActivity::class.java)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .putExtra(Const.Key.OPEN_SECTION, section),
+                )
                 true
             } catch (e: ActivityNotFoundException) {
                 false
