@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Logs -->
+    <string name="tv_log_section_su">Superuser log</string>
+    <string name="tv_log_section_magisk">Magisk log</string>
+    <string name="tv_log_refresh">Refresh</string>
+    <string name="tv_log_clear">Clear</string>
+    <string name="tv_log_save">Save</string>
+    <string name="tv_log_allowed">Allowed</string>
+    <string name="tv_log_denied">Denied</string>
+    <string name="tv_log_clear_title">Clear this log?</string>
+    <string name="tv_log_clear_su_msg">All superuser log entries will be deleted.</string>
+    <string name="tv_log_clear_magisk_msg">The Magisk log file will be emptied.</string>
+    <string name="tv_log_truncated">Showing the last %1$d of %2$d lines. Save the log to get all of it.</string>
+    <string name="tv_log_saved">Saved to %1$s</string>
+    <string name="tv_log_save_failed">Could not save the log</string>
+    <string name="tv_log_su_command">Command</string>
+
+    <!-- Install -->
+    <string name="tv_install_blurb">Magisk is patched into your device\'s boot image. Pick how the image is obtained, then start.</string>
+    <string name="tv_install_version">Magisk %1$s (%2$d)</string>
+    <string name="tv_install_method_patch_hint">Opens a file picker to choose a boot image to patch. The patched image is saved to Downloads.</string>
+    <string name="tv_install_method_direct_hint">Patches and flashes the boot image of this device.</string>
+    <string name="tv_install_method_slot_hint">Patches the other slot after an OTA update.</string>
+    <string name="tv_install_whats_new">What\'s new</string>
+
+    <!-- Flash console -->
+    <string name="tv_flash_save">Save log</string>
+    <string name="tv_flash_module">Installing module</string>
+    <string name="tv_flash_action">Module action</string>
+    <string name="tv_flash_back_blocked">Please wait until this finishes.</string>
+    <string name="tv_flash_empty">Starting…</string>
+</resources>

@@ -106,7 +106,7 @@ class SplashController<T>(private val activity: T)
                 packageManager.getApplicationInfo(APP_PACKAGE_NAME, 0)
                 Shell.cmd("(pm uninstall $APP_PACKAGE_NAME)& >/dev/null 2>&1").exec()
             }
-        } else {
+        } else if (!BuildConfig.IS_TEST_APP_ID) {
             if (Config.suManager.isNotEmpty()) {
                 Config.suManager = ""
             }

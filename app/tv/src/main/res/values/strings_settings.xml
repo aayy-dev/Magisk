@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Settings -->
+    <string name="tv_set_language_system_hint">Opens the system language settings for this app</string>
+    <string name="tv_set_download_dir_hint">Folder in shared storage, for example Download</string>
+    <string name="tv_set_download_dir_empty">Default</string>
+    <string name="tv_set_url_empty">Not set</string>
+    <string name="tv_set_save">Save</string>
+    <string name="tv_set_cancel">Cancel</string>
+
+    <!-- DenyList -->
+    <string name="tv_deny_filters">Show</string>
+    <string name="tv_deny_enforced">Enforced</string>
+    <string name="tv_deny_not_enforced">Not enforced</string>
+    <string name="tv_deny_processes">Processes</string>
+    <string name="tv_deny_default_processes">Default processes</string>
+    <string name="tv_deny_default_processes_summary">The app\'s main process and its zygote and isolated processes</string>
+    <string name="tv_deny_count">%1$d of %2$d processes</string>
+    <string name="tv_deny_none">Not on the DenyList</string>
+    <string name="tv_deny_empty">No apps to show</string>
+    <string name="tv_deny_filter_on">On</string>
+    <string name="tv_deny_filter_off">Off</string>
+</resources>

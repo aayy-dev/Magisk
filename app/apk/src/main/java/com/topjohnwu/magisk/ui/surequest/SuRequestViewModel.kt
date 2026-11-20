@@ -31,8 +31,14 @@ import com.topjohnwu.magisk.databinding.set
 import com.topjohnwu.magisk.events.AuthEvent
 import com.topjohnwu.magisk.events.DieEvent
 import com.topjohnwu.magisk.events.ShowUIEvent
+import com.topjohnwu.magisk.tv.surequest.TvSuState
+import com.topjohnwu.magisk.tv.surequest.isTelevision
 import com.topjohnwu.magisk.utils.TextHolder
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import com.topjohnwu.superuser.internal.UiThreadHandler
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit.SECONDS
 
@@ -55,6 +61,17 @@ class SuRequestViewModel(
     @get:Bindable
     var grantEnabled = false
         set(value) = set(value, field, { field = it }, BR.grantEnabled)
+
+    // Mirror of the bindable state above for the Compose prompt shown on Android TV
+    private val _tvState = MutableStateFlow(TvSuState())
+    val tvState: StateFlow<TvSuState> = _tvState
+
+    val timeoutSeconds: Int get() = Config.suDefaultTimeout
+
+    fun selectDuration(position: Int) {
+        selectedItemPosition = position
+        _tvState.update { it.copy(selected = position) }
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     val grantTouchListener = View.OnTouchListener { _: View, event: MotionEvent ->
@@ -119,13 +136,20 @@ class SuRequestViewModel(
             packageName = info.packageName
         }
 
-        selectedItemPosition = timeoutPrefs.getInt(packageName, 0)
+        // On TV a first request defaults to "Once" (index 1) instead of "Forever" (index 0): a remote's
+        // OK is easy to press by accident, and a long-lived grant should be a deliberate choice.
+        selectedItemPosition = timeoutPrefs.getInt(packageName, if (AppContext.isTelevision) 1 else 0)
+        _tvState.update { it.copy(selected = selectedItemPosition) }
 
         // Set timer
         timer.start()
 
         // Actually show the UI
-        ShowUIEvent(if (Config.suTapjack) EmptyAccessibilityDelegate else null).publish()
+        if (AppContext.isTelevision) {
+            ShowTvUIEvent().publish()
+        } else {
+            ShowUIEvent(if (Config.suTapjack) EmptyAccessibilityDelegate else null).publish()
+        }
         initialized = true
     }
 
@@ -150,6 +174,12 @@ class SuRequestViewModel(
     private fun cancelTimer() {
         timer.cancel()
         denyText.seconds = 0
+        // Cancelling before the first tick must not leave Grant disabled for good
+        UiThreadHandler.handler.postDelayed({
+            grantEnabled = true
+            _tvState.update { it.copy(grantEnabled = true) }
+        }, 1000)
+        _tvState.update { it.copy(seconds = 0) }
     }
 
     private inner class SuTimer(
@@ -162,10 +192,12 @@ class SuRequestViewModel(
                 grantEnabled = true
             }
             denyText.seconds = (remains / 1000).toInt() + 1
+            _tvState.update { it.copy(seconds = denyText.seconds, grantEnabled = grantEnabled) }
         }
 
         override fun onFinish() {
             denyText.seconds = 0
+            _tvState.update { it.copy(seconds = 0) }
             respond(DENY)
         }
 

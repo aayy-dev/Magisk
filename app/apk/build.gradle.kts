@@ -39,6 +39,7 @@ android {
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":tv"))
     coreLibraryDesugaring(libs.jdk.libs)
 
     implementation(libs.indeterminate.checkbox)

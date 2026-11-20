@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tabs -->
+    <string name="tv_tab_home">Home</string>
+
+    <!-- Home -->
+    <string name="tv_home_installed">Magisk %1$s</string>
+    <string name="tv_home_not_installed">Magisk is not installed</string>
+    <string name="tv_home_not_installed_hint">Install Magisk to get root, modules and the DenyList.</string>
+    <string name="tv_home_unsupported">This Magisk version is no longer supported</string>
+    <string name="tv_home_up_to_date">Up to date</string>
+    <string name="tv_home_reinstall">Reinstall</string>
+    <string name="tv_home_overview">Overview</string>
+    <string name="tv_home_hide_notice">OK to hide</string>
+    <string name="tv_home_env_title">Additional setup required</string>
+    <string name="tv_home_env_hint">Magisk needs to fix its environment. This takes a few seconds and then reboots the device.</string>
+    <string name="tv_home_restoring">Restoring images…</string>
+
+    <string name="tv_card_su_value">%1$d with access</string>
+    <string name="tv_card_su_total">%1$d apps asked</string>
+    <string name="tv_card_su_none">No requests yet</string>
+    <string name="tv_card_modules_value">%1$d of %2$d enabled</string>
+    <string name="tv_card_modules_none">None installed</string>
+    <string name="tv_card_denylist_on">Enforced</string>
+    <string name="tv_card_denylist_off">Not enforced</string>
+    <string name="tv_card_app_latest">Latest %1$s</string>
+    <string name="tv_card_reboot">Reboot</string>
+    <string name="tv_card_reboot_hint">Restart or boot another mode</string>
+
+    <string name="tv_chip_zygisk">Zygisk</string>
+    <string name="tv_chip_ramdisk">Ramdisk</string>
+    <string name="tv_chip_slot">Slot %1$s</string>
+    <string name="tv_chip_denylist">DenyList</string>
+
+    <string name="tv_reboot_title">Reboot</string>
+    <string name="tv_reboot_normal">Reboot</string>
+    <string name="tv_reboot_safe_mode_on">Safe mode: on</string>
+    <string name="tv_reboot_safe_mode_off">Safe mode: off</string>
+</resources>

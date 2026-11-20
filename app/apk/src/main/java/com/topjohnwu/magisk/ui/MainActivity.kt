@@ -3,6 +3,7 @@ package com.topjohnwu.magisk.ui
 import android.Manifest
 import android.Manifest.permission.REQUEST_INSTALL_PACKAGES
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
@@ -35,6 +36,8 @@ import com.topjohnwu.magisk.databinding.ActivityMainMd2Binding
 import com.topjohnwu.magisk.ui.home.HomeFragmentDirections
 import com.topjohnwu.magisk.ui.theme.Theme
 import com.topjohnwu.magisk.view.MagiskDialog
+import com.topjohnwu.magisk.tv.TvActivity
+import com.topjohnwu.magisk.tv.isTelevision
 import com.topjohnwu.magisk.view.Shortcuts
 import kotlinx.coroutines.launch
 import java.io.File
@@ -66,6 +69,23 @@ class MainActivity : NavigationActivity<ActivityMainMd2Binding>(), SplashScreenH
     private var isRootFragment = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // The phone layout is not usable with a remote: hand over to the TV UI. Not while running as
+        // the stub (hidden app): its manifest only declares MainActivity and SuRequestActivity.
+        // A launch that carries the previous app's settings (un-hiding the app) must reach SplashController
+        // unchanged so it can migrate them; the process restart that follows redirects normally.
+        if (!isRunningAsStub && isTelevision && intent.getBundleExtra(Const.Key.PREV_CONFIG) == null) {
+            val started = try {
+                startActivity(Intent(this, TvActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                true
+            } catch (e: ActivityNotFoundException) {
+                false
+            }
+            if (started) {
+                super.onCreate(savedInstanceState)
+                finish()
+                return
+            }
+        }
         setTheme(Theme.selected.themeRes)
         splashController.preOnCreate()
         super.onCreate(savedInstanceState)

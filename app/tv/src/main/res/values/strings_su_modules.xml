@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Superuser -->
+    <string name="tv_su_state_allowed">Allowed</string>
+    <string name="tv_su_state_denied">Denied</string>
+    <string name="tv_su_state_restricted">Restricted</string>
+    <string name="tv_su_shared_uid">Shared UID</string>
+    <string name="tv_su_logging">Logging</string>
+    <string name="tv_su_unavailable">Superuser is not available</string>
+    <string name="tv_su_unavailable_hint">Install Magisk and reboot to manage which apps have root access.</string>
+
+    <!-- Modules -->
+    <string name="tv_mod_install_hint">Pick a module .zip from storage and flash it. Review modules before installing them: they run with root.</string>
+    <string name="tv_mod_enabled">Enabled</string>
+    <string name="tv_mod_state_disabled">Disabled</string>
+    <string name="tv_mod_state_removed">Removal pending</string>
+    <string name="tv_mod_state_updated">Updated</string>
+    <string name="tv_mod_state_suspended">Suspended</string>
+    <string name="tv_mod_unavailable">Modules are not available</string>
+    <string name="tv_mod_unavailable_hint">Magisk has to be installed and active before modules can be managed.</string>
+    <string name="tv_mod_update_to">Update to %1$s (%2$d)</string>
+    <string name="tv_mod_changelog_loading">Loading changelog…</string>
+    <string name="tv_mod_state_enabled">Enabled</string>
+    <string name="tv_mod_install_ok">Press OK to pick a .zip file</string>
+</resources>

@@ -15,7 +15,9 @@ android {
     namespace = "com.topjohnwu.magisk.core"
 
     defaultConfig {
-        buildConfigField("String", "APP_PACKAGE_NAME", "\"com.topjohnwu.magisk\"")
+        buildConfigField("String", "APP_PACKAGE_NAME", "\"${Config.appId}\"")
+        // True for a side-by-side test build (-PappIdSuffix): it must not touch the real manager's state
+        buildConfigField("boolean", "IS_TEST_APP_ID", "${Config.appIdSuffix.isNotEmpty()}")
         buildConfigField("int", "APP_VERSION_CODE", "${Config.versionCode}")
         buildConfigField("String", "APP_VERSION_NAME", "\"${Config.version}\"")
         buildConfigField("int", "STUB_VERSION", Config.stubVersion)
