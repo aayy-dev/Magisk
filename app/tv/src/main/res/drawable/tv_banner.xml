@@ -1,28 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- TV launcher banner (320x180 px at xhdpi). Wordmark outlined from Roboto (Apache License 2.0). -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="160dp"
     android:height="90dp"
     android:viewportWidth="320"
     android:viewportHeight="180">
-    <!-- Solid base, then the gradient on top (gradient fills need API 24) -->
-    <path
-        android:fillColor="#FF00998A"
-        android:pathData="M 0 0 H 320 V 180 H 0 Z" />
-    <path
-        android:pathData="M 0 0 H 320 V 180 H 0 Z">
-        <aapt:attr name="android:fillColor">
-            <gradient
-                android:startX="0"
-                android:startY="0"
-                android:endX="320"
-                android:endY="180"
-                android:startColor="#FF1DD1BC"
-                android:endColor="#FF00695C"
-                android:type="linear" />
-        </aapt:attr>
-    </path>
     <group
         android:translateX="4.949"
         android:translateY="20.837"
